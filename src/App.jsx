@@ -114,7 +114,7 @@ const App = () => {
     <div id="page">
     {/* Greys out the 'previous' button if the current page state is 1 */}
     <button disabled={page === 1} onClick={() => handlePage('previous')}>Previous</button>
-    Page {page}
+    Page {page} of {totals.page}
     <button onClick={() => handlePage('next')}>Next</button>
     </div>
     </>
