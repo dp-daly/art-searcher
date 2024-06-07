@@ -56,6 +56,7 @@ const App = () => {
         onChange={handleSearch}
       />
     </div>
+    <div className="buffer">...</div>
     <div id="container">
       {airplaneArt.map((art) => {
       return <Card
