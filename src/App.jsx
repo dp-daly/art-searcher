@@ -11,13 +11,14 @@ const App = () => {
     image: "",
     id: ""
   }])
+  const [search, setSearch] = useState("")
   
   useEffect(() => {
     fetchAirplaneArt();
-  }, [])
+  }, [search])
   
   async function fetchAirplaneArt() {
-    const resp = await fetch("https://api.artic.edu/api/v1/artworks/search?q=airplane&fields=artist_title,id,image_id,title")
+    const resp = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${search}&fields=artist_title,id,image_id,title`)
     const artObjects = await resp.json()
     const resultsArray = artObjects.data
     const resultsInfo = resultsArray.map((object) => {
@@ -31,11 +32,30 @@ const App = () => {
     setAirplaneArt(resultsInfo)
   }
 
+  function handleSearch(e) {
+    setSearch(e.target.value)
+  }
+
+  console.log(search)
+
   return (
   //RENDER
     <>
     <h1>Art Search</h1>
     <h3>From the collection of the Art Institute of Chicago</h3>
+    <ul>
+      <li>Enter your chosen search term.</li>
+      <li>See up to 10 results from the collection.</li>
+      <li>Results include a thumbnail, the artist, and the artwork title.</li>
+    </ul>
+    <div id="search">
+    <input
+        type="text"
+        value={search}
+        placeholder="Enter search term..."
+        onChange={handleSearch}
+      />
+    </div>
     <div id="container">
       {airplaneArt.map((art) => {
       return <Card
