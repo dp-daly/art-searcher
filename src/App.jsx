@@ -38,6 +38,8 @@ const App = () => {
   }
 
   function handlePage(action) {
+    //because this is a function, react passes in the current value of "page"; 
+    //if we were to enter a value, it would simply update the state
     setPage(currentPage => {
       if (action === 'previous') {
         return currentPage - 1;
