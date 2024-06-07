@@ -29,7 +29,14 @@ const App = () => {
     } else {
     toast(`There are ${totals.total} results for ${search}.`)
     }
-  }, [search, page])
+  }, [search])
+
+
+  //Separated out to avoid toast from firing with each new page.
+  useEffect(() => {
+    fetchArt();
+  }, [page]);
+
   
   async function fetchArt() {
     const resp = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${search}&fields=artist_title,id,image_id,title&limit=8&page=${page}`)
@@ -101,6 +108,12 @@ const App = () => {
       />
     </div>
     <div className="buffer">...</div>
+    <div id="page">
+    {/* Greys out the 'previous' button if the current page state is 1 */}
+    <button disabled={page === 1} onClick={() => handlePage('previous')}>Previous</button>
+    Page {page} of {totals.page}
+    <button onClick={() => handlePage('next')}>Next</button>
+    </div>
     <div id="container">
       {art.map((art) => {
       return <Card
@@ -110,12 +123,6 @@ const App = () => {
       image={art.image}
       />
     })}
-    </div>
-    <div id="page">
-    {/* Greys out the 'previous' button if the current page state is 1 */}
-    <button disabled={page === 1} onClick={() => handlePage('previous')}>Previous</button>
-    Page {page} of {totals.page}
-    <button onClick={() => handlePage('next')}>Next</button>
     </div>
     </>
   );
