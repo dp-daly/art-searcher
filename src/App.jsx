@@ -3,7 +3,6 @@ import './App.css'
 import Card from './components/Card'
 
 const App = () => {
-
   //SETTING STATE
   const [art, setArt] = useState([{
     artist: "",
@@ -35,6 +34,7 @@ const App = () => {
 
   function handleSearch(e) {
     setSearch(e.target.value)
+    setPage(1)
   }
 
   function handlePage(action) {
@@ -56,7 +56,7 @@ const App = () => {
       <li>Enter your chosen search term.</li>
       <li>See up to 8 results from the collection per page.</li>
       <li>Results include a thumbnail, the artist, and the artwork title.</li>
-      <li>See the next 8 results at the bottom of the page.</li>
+      <li>Click 'next' at the bottom of the page to see the next 8 results.</li>
     </ul>
     <div id="search">
     <input
