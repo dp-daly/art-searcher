@@ -115,7 +115,8 @@ const App = () => {
     </div>
     <div className="buffer">...</div>
     <div id="page">
-    {/* Greys out the 'previous' button if the current page state is 1 */}
+    {/* To do: make "page" into a component */}
+    {/* "disabled" out the 'previous' button if the current page state is 1 */}
     <button disabled={page === 1} onClick={() => handlePage('previous')}>Previous</button>
     Page {page} of {totals.page}
     <button onClick={() => handlePage('next')}>Next</button>
@@ -129,6 +130,11 @@ const App = () => {
       image={art.image}
       />
     })}
+    </div>
+    <div id="page">
+    <button disabled={page === 1} onClick={() => handlePage('previous')}>Previous</button>
+    Page {page} of {totals.page}
+    <button onClick={() => handlePage('next')}>Next</button>
     </div>
     </>
   );

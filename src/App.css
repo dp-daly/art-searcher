@@ -45,6 +45,7 @@ input {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    min-width: 1360px;
     width: 95%;
     border: 2px solid black;
     border-radius: 25px;
@@ -98,7 +99,7 @@ white-space: nowrap;
     margin-top: auto;
   }
 
-  #page {
+#page {
     display: flex;
     gap: 10px;
     justify-content: center;
@@ -106,7 +107,7 @@ white-space: nowrap;
     width: 95%; 
 }
   
-  button {
+button {
     border-radius: 8px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
@@ -115,11 +116,13 @@ white-space: nowrap;
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
-  }
-  button:hover {
+}
+
+button:hover {
     border-color: #646cff;
-  }
-  button:focus,
-  button:focus-visible {
+}
+
+button:focus,
+button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
-  }
+}
