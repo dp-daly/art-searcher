@@ -5,20 +5,21 @@ import Card from './components/Card'
 const App = () => {
 
   //SETTING STATE
-  const [airplaneArt, setAirplaneArt] = useState([{
+  const [art, setArt] = useState([{
     artist: "",
     title: "", 
     image: "",
     id: ""
   }])
   const [search, setSearch] = useState("")
+  const [page, setPage] = useState(1)
   
   useEffect(() => {
-    fetchAirplaneArt();
-  }, [search])
+    fetchArt();
+  }, [search, page])
   
-  async function fetchAirplaneArt() {
-    const resp = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${search}&fields=artist_title,id,image_id,title&limit=8`)
+  async function fetchArt() {
+    const resp = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${search}&fields=artist_title,id,image_id,title&limit=8&page=${page}`)
     const artObjects = await resp.json()
     const resultsArray = artObjects.data
     const resultsInfo = resultsArray.map((object) => {
@@ -29,14 +30,22 @@ const App = () => {
         id: object.id
       }
     })
-    setAirplaneArt(resultsInfo)
+    setArt(resultsInfo)
   }
 
   function handleSearch(e) {
     setSearch(e.target.value)
   }
 
-  console.log(search)
+  function handlePage(action) {
+    setPage(currentPage => {
+      if (action === 'previous') {
+        return currentPage - 1;
+      } else {
+        return currentPage + 1;
+      }
+    });
+  }
 
   return (
   //RENDER
@@ -45,8 +54,9 @@ const App = () => {
     <h3>From the collection of the Art Institute of Chicago</h3>
     <ul>
       <li>Enter your chosen search term.</li>
-      <li>See up to 8 results from the collection.</li>
+      <li>See up to 8 results from the collection per page.</li>
       <li>Results include a thumbnail, the artist, and the artwork title.</li>
+      <li>See the next 8 results at the bottom of the page.</li>
     </ul>
     <div id="search">
     <input
@@ -58,7 +68,7 @@ const App = () => {
     </div>
     <div className="buffer">...</div>
     <div id="container">
-      {airplaneArt.map((art) => {
+      {art.map((art) => {
       return <Card
       key={art.id}
       artist={art.artist}
@@ -66,6 +76,11 @@ const App = () => {
       image={art.image}
       />
     })}
+    </div>
+    <div id="page">
+    <button disabled={page === 1} onClick={() => handlePage('previous')}>Previous</button>
+    Page {page}
+    <button onClick={() => handlePage('next')}>Next</button>
     </div>
     </>
   );
