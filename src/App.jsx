@@ -28,7 +28,11 @@ const App = () => {
       toast(`There are no results for ${search}`)
     } else {
       //Regex added to accommodate different total number lengths with appropriate commas
-    toast(`There are ${totals.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} results for ${search}.`)
+    toast(
+      <>
+        There are <b>{totals.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</b> results for <b>{search}</b>.
+      </>
+    )
     }
   }, [search])
 
