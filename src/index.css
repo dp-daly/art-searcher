@@ -23,7 +23,9 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  display: flex;
+  margin: 20px;
+  background-color: white;
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -33,6 +35,8 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  background-color: maroon;
+  color: white;
 }
 
 button {
