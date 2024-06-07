@@ -18,7 +18,7 @@ const App = () => {
   }, [search])
   
   async function fetchAirplaneArt() {
-    const resp = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${search}&fields=artist_title,id,image_id,title`)
+    const resp = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${search}&fields=artist_title,id,image_id,title&limit=8`)
     const artObjects = await resp.json()
     const resultsArray = artObjects.data
     const resultsInfo = resultsArray.map((object) => {
@@ -45,7 +45,7 @@ const App = () => {
     <h3>From the collection of the Art Institute of Chicago</h3>
     <ul>
       <li>Enter your chosen search term.</li>
-      <li>See up to 10 results from the collection.</li>
+      <li>See up to 8 results from the collection.</li>
       <li>Results include a thumbnail, the artist, and the artwork title.</li>
     </ul>
     <div id="search">
