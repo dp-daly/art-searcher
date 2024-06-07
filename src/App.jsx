@@ -27,7 +27,8 @@ const App = () => {
     } else if (totals.total === 0) {
       toast(`There are no results for ${search}`)
     } else {
-    toast(`There are ${totals.total} results for ${search}.`)
+      //Regex added to accommodate different total number lengths with appropriate commas
+    toast(`There are ${totals.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} results for ${search}.`)
     }
   }, [search])
 
@@ -89,7 +90,8 @@ const App = () => {
     draggable
     pauseOnHover
     theme="dark"
-    transition: Zoom
+    transition: Slide
+    toastStyle={{ backgroundColor: "goldenrod", color: "black" }}
     />
     <h1>Art Search</h1>
     <h3>From the collection of the Art Institute of Chicago</h3>
