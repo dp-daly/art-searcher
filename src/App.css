@@ -1,6 +1,7 @@
 #container {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     width: 100%;
 }
 
@@ -16,6 +17,7 @@
     width: 45vh;
     height: 45vh;
     background-color: gray;
+    background-size: cover;
     border-radius: 8px;
     overflow: hidden; 
     box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.5);

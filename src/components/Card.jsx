@@ -2,8 +2,7 @@ const Card = ({ artist, title, image }) => {
 
 return (
 <div id="card">
-    <div id="img-placeholder">
-        <img src={`https://www.artic.edu/iiif/2/${image}/full/843,/0/default.jpg`} alt={title} />
+    <div id="img-placeholder" style={{backgroundImage: `url(https://www.artic.edu/iiif/2/${image}/full/843,/0/default.jpg)`}}>
     </div>
     <div id="card-footer">
     <h3>{artist}</h3>
