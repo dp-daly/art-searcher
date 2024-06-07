@@ -16,7 +16,7 @@ const App = () => {
   const [page, setPage] = useState(1)
   const [totals, setTotals] = useState({
     total: 0,
-    pages: 0
+    page: 0
   })
   
   useEffect(() => {
@@ -80,6 +80,10 @@ const App = () => {
     });
   }
 
+  function returnToPage1() {
+    setPage(1)
+  }
+
   return (
   //RENDER
     <>
@@ -97,13 +101,13 @@ const App = () => {
     transition: Slide
     toastStyle={{ backgroundColor: "goldenrod", color: "black" }}
     />
-    <h1>Art Search</h1>
+    <h1 onClick={returnToPage1}>Art Search</h1>
     <h3>From the collection of the Art Institute of Chicago</h3>
     <ul>
       <li>Enter your chosen search term.</li>
-      <li>See up to 8 results from the collection per page.</li>
       <li>Results include a thumbnail, the artist, and the artwork title.</li>
-      <li>Click 'next' at the bottom of the page to see the next 8 results.</li>
+      <li>See up to 8 results from the collection per page. Click 'next' above or below the gallery to see the next 8 results.</li>
+      <li>If you would like to return to the first page of your search, just click on "Art Search" at the top of the page.</li>
     </ul>
     <div id="search">
     <input
