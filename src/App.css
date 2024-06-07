@@ -61,7 +61,18 @@ input {
     font-size: 14px;
     height: auto;
     text-align: center;
-  }
+}
+
+#artist-title {
+height: 20px; 
+}
+
+#card-title {
+    height: 30px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
   
 #card-footer * {
     margin-top: auto;
