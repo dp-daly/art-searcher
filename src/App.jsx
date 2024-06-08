@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Card from './components/Card'
+import Page from './components/Page';
 import { ToastContainer, Zoom, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -46,6 +47,7 @@ const App = () => {
   async function fetchArt() {
     const resp = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${search}&fields=artist_title,id,image_id,title&limit=8&page=${page}`)
     const artObjects = await resp.json()
+    console.log(artObjects)
     const resultsArray = artObjects.data
     const totalResults = {
       total: artObjects.pagination.total,
@@ -84,6 +86,15 @@ const App = () => {
     setPage(1)
   }
 
+  //Defining props to be passed to the Page component here and using the spread operator to pass them through in both instances of its use below. This is to make the code more maintainable if props need to change when it is being used more than once. 
+  const pageProps = {
+    index: page,
+    page: page,
+    total: totals.page,
+    updatePage: handlePage
+  };
+
+
   return (
   //RENDER
     <>
@@ -98,7 +109,7 @@ const App = () => {
     draggable
     pauseOnHover
     theme="dark"
-    transition: Slide
+    transition: Zoom
     toastStyle={{ backgroundColor: "goldenrod", color: "black" }}
     />
     <h1 onClick={returnToPage1}>Art Search</h1>
@@ -118,13 +129,7 @@ const App = () => {
       />
     </div>
     <div className="buffer">...</div>
-    <div id="page">
-    {/* To do: make "page" into a component */}
-    {/* "disabled" out the 'previous' button if the current page state is 1 */}
-    <button disabled={page === 1} onClick={() => handlePage('previous')}>Previous</button>
-    Page {page} of {totals.page}
-    <button onClick={() => handlePage('next')}>Next</button>
-    </div>
+    <Page {...pageProps} />
     <div id="container">
       {art.map((art) => {
       return <Card
@@ -135,11 +140,7 @@ const App = () => {
       />
     })}
     </div>
-    <div id="page">
-    <button disabled={page === 1} onClick={() => handlePage('previous')}>Previous</button>
-    Page {page} of {totals.page}
-    <button onClick={() => handlePage('next')}>Next</button>
-    </div>
+    <Page {...pageProps} />
     </>
   );
 }
